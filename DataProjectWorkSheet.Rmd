@@ -31,6 +31,8 @@ The goal of the project is to explore and wrangle an interesting data set, ultim
 
 The code book for the data is available as a handout in class and as a document in Canvas.  Look it over.  With your group, consider a few preliminary ideas about variables you might be particularly interested in, and what kinds of research questions might be appropriate.  You can use this space to write a few notes if you desire.
 
+## ideas
+- percent poverty vs percent in school (correlation)
 
 
 
@@ -46,9 +48,8 @@ Use the code-chunk below to load the data into the workspace and begin exploring
 ```{r}
 RawData <- read.csv(file.choose())
 
-
-
 ```
+
 
 # Step 2: Write your research questions.
 
@@ -70,6 +71,31 @@ Use this space to manipulate the data in whatever way you deem necessary.  We su
 
 ```{r}
 
+unique(RawData$offense_type_id)
+```
+```{r}
+# Defining violent crimes
+violent_crimes <- c("assault-simple", "weapon-unlawful-discharge-of", "menacing-felony-w-weap", "agg-aslt-shoot",
+                    "robbery-bank", "robbery-street", "robbery-business", "robbery-car-jacking", "robbery-residence",
+                    "homicide-other", "aggravated-assault", "kidnap-adult-victim", "weapon-other-viol", "agg-aslt-police-weapon",
+                    "arson-business", "arson-residence", "arson-vehicle", "arson-other", "arson-public-building",
+                    "sexual-assault", "rape", "homicide-family", "false-imprisonment", "weapon-fire-into-occ-bldg", "weapon-fire-into-occ-veh",
+                    "explosive-incendiary-dev-use", "explosive-incendiary-dev-pos", "threats-to-injure", "assault-police-simple")
+
+# Function to categorize crimes
+categorize_crime <- function(crime_type) {
+  if (crime_type %in% violent_crimes) {
+    return("Yes")
+  } else {
+    return("No")
+  }
+}
+
+# Applying the categorization
+RawData$violent <- sapply(RawData$offense_type_id, categorize_crime)
+
+# Checking the head of the modified DataFrame
+head(RawData)
 ```
 
 You should be able to clearly describe the data manipulations you perform, as well as the resulting variables.
