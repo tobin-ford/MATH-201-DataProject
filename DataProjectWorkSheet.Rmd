@@ -57,9 +57,11 @@ RawData <- read.csv(file.choose())
 
 Write down what your research questions, and translate them into the correct hypothesis tests.  Review the research question guidelines in step one if necessary
 
-### Research Question 1:
+### Research Question 1: (Correlation)
 Is there a positive association between the percent poverty of a neighborhood and the percent of the population being in school?
-### Research Question 2:
+
+### Research Question 2: (Chi-Squared)
+Does the crime type (non violent / violent / property) match the expected US rates?
 
 
 
