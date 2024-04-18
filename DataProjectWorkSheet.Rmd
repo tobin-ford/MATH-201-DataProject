@@ -72,8 +72,7 @@ Use this space to manipulate the data in whatever way you deem necessary.  We su
 ```{r}
 
 unique(RawData$offense_type_id)
-```
-```{r}
+
 # Defining violent crimes
 violent_crimes <- c("assault-simple", "weapon-unlawful-discharge-of", "menacing-felony-w-weap", "agg-aslt-shoot",
                     "robbery-bank", "robbery-street", "robbery-business", "robbery-car-jacking", "robbery-residence",
