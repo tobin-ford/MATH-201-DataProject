@@ -15,6 +15,7 @@ library(mosaic, warn.conflicts = FALSE)
 library(ggformula, warn.conflicts = FALSE)
 library(Lock5Data, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
+library(ggplot2, warn.conflicts = FALSE)
 
 ```
 
@@ -115,6 +116,15 @@ You should be able to clearly describe the data manipulations you perform, as we
 Produce two visualizations that help you gain insight into the research questions from part 2 (one for each).  Think about what the visualizations tell you about your research question.
 
 ```{r}
+# Creating the bar plot
+ggplot(RawData, aes(x = crime_category, fill = crime_category)) +
+  geom_bar() +  # This geom_bar plots a bar for each category of crime
+  labs(title = "Distribution of Crime Categories",
+       x = "Crime Category",
+       y = "Frequency",
+       fill = "Category") +
+  theme_minimal() +  # Using a minimal theme for better aesthetics
+  theme(plot.title = element_text(hjust = 0.5))  # Centering the plot title
 
 ```
 
