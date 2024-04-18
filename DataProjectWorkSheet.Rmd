@@ -48,6 +48,8 @@ Use the code-chunk below to load the data into the workspace and begin exploring
 ```{r}
 RawData <- read.csv(file.choose())
 
+
+
 ```
 
 
@@ -56,9 +58,7 @@ RawData <- read.csv(file.choose())
 Write down what your research questions, and translate them into the correct hypothesis tests.  Review the research question guidelines in step one if necessary
 
 ### Research Question 1:
-
-
-
+Is there a positive association between the percent poverty of a neighborhood and the percent of the population being in school?
 ### Research Question 2:
 
 
