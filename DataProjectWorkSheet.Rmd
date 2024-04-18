@@ -50,14 +50,19 @@ RawData <- read.csv(file.choose())
 
 ```
 
+
+```{r}
+
+
+unique(RawData$offense_type_id)
+```
+
 # Step 2: Write your research questions.
 
 Write down what your research questions, and translate them into the correct hypothesis tests.  Review the research question guidelines in step one if necessary
 
 ### Research Question 1:
-
-
-
+Is there a positive association between the percent poverty of a neighborhood and the percent of the population being in school?
 ### Research Question 2:
 
 
