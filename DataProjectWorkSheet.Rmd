@@ -70,28 +70,37 @@ Once you have your research questions, it is strongly recommended that you talk 
 Use this space to manipulate the data in whatever way you deem necessary.  We suggest you select only the variables you need to perform your data analysis.
 
 ```{r}
-
-unique(RawData$offense_type_id)
-
-# Defining violent crimes
 violent_crimes <- c("assault-simple", "weapon-unlawful-discharge-of", "menacing-felony-w-weap", "agg-aslt-shoot",
                     "robbery-bank", "robbery-street", "robbery-business", "robbery-car-jacking", "robbery-residence",
                     "homicide-other", "aggravated-assault", "kidnap-adult-victim", "weapon-other-viol", "agg-aslt-police-weapon",
-                    "arson-business", "arson-residence", "arson-vehicle", "arson-other", "arson-public-building",
-                    "sexual-assault", "rape", "homicide-family", "false-imprisonment", "weapon-fire-into-occ-bldg", "weapon-fire-into-occ-veh",
-                    "explosive-incendiary-dev-use", "explosive-incendiary-dev-pos", "threats-to-injure", "assault-police-simple")
+                    "false-imprisonment", "weapon-fire-into-occ-bldg", "weapon-fire-into-occ-veh",
+                    "explosive-incendiary-dev-use", "explosive-incendiary-dev-pos", "threats-to-injure", "assault-police-simple",
+                    "homicide-family")
+
+property_crimes <- c("theft-parts-from-vehicle", "theft-items-from-vehicle", "burglary-residence-by-force",
+                     "burglary-residence-no-force", "burglary-business-no-force", "burglary-business-by-force",
+                     "theft-other", "theft-bicycle", "theft-from-bldg", "theft-shoplift", "vehicle-theft", "theft-of-motor-vehicle",
+                     "burglary-safe", "theft-embezzle", "burglary-vending-machine", "burg-auto-theft-busn-no-force",
+                     "burg-auto-theft-resd-no-force", "burg-auto-theft-busn-w-force", "burg-auto-theft-resd-w-force",
+                     "theft-purse-snatch-no-force", "theft-stln-vehicle-trailer", "theft-fail-return-rent-veh",
+                     "theft-unauth-use-of-ftd", "theft-of-rental-property", "theft-pick-pocket", "arson-other",
+                     "arson-business", "arson-residence", "arson-vehicle", "arson-public-building", "theft-of-services",
+                     "theft-gas-drive-off", "burglary-poss-of-tools", "theft-from-mails", "stolen-property-buy-sell-rec",
+                     "property-crimes-other")
 
 # Function to categorize crimes
 categorize_crime <- function(crime_type) {
   if (crime_type %in% violent_crimes) {
-    return("Yes")
+    return("Violent")
+  } else if (crime_type %in% property_crimes) {
+    return("Property")
   } else {
-    return("No")
+    return("Nonviolent")
   }
 }
 
 # Applying the categorization
-RawData$violent <- sapply(RawData$offense_type_id, categorize_crime)
+RawData$crime_category <- sapply(RawData$offense_type_id, categorize_crime)
 
 # Checking the head of the modified DataFrame
 head(RawData)
