@@ -128,6 +128,11 @@ ggplot(RawData, aes(x = crime_category, fill = crime_category)) +
 
 ```
 
+```{r}
+dotplot(percent_in_school ~ percent_poverty, data = RawData)
+
+RawData$percent_poverty
+```
 
 # Step 5: Perform inference (if appropriate)
 
