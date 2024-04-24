@@ -32,7 +32,7 @@ CrimeDataRaw <- read.csv(file.choose())
 
 ## Introduction
 
-*For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school and if the number of crimes for each type (non-violent, violent, and property), are 25,000 each or not.*  
+*For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property). *  
   
 ## Research Question 1
 
