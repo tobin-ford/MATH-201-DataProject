@@ -32,7 +32,7 @@ CrimeDataRaw <- read.csv(file.choose())
 
 ## Introduction
 
-*For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property). *  
+For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property). 
   
 ## Research Question 1
 
@@ -42,13 +42,16 @@ CrimeDataRaw <- read.csv(file.choose())
    - *Discuss what kind of data visualization you created for this question, and what you learned from it as it relates to the research question.  You will put this visualization at the end of the document.*
   - *Introduce the inference procedure and report the p-value, as well as your conclusion in context.  Make sure you discuss the strength of the evidence.*
   
-## Research Question 2
+## Are the number of crimes committed equally spread across the three main crime categories? (non-violent, violent, and property)
 
-*Write the research question in the section title and clearly detail any data manipulations you performed to be able to answer this research question. Do not include R code; use complete sentences to describe what you did. * 
+We began by transforming the variable 'crime_category' into three, which we have created a new variable called 'categorized_crime.' Data points that received the 'violent' type for 'crime_category,' includes crimes such as assault, robbery, homicide, etc, with data points receiving 'property_crimes' are theft, arson, etc. The rest are categorized a 'non-violent.' After. performing those operations in creating a new variable, we are left with being able to answer the following hypothesis:
+
+\[H_0: \text{The distribution of crimes is equal across the three crime categories (non-violent, violent, and property).}\]
+\[H_a: \text{The distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).}\]
   
-   - *Write the relevant hypothesis test and clearly define the parameter of interest in the context of your research question.* 
-   - *Discuss what kind of data visualization you created for this question, and what you learned from it as it relates to the research question.  You will put this visualization at the end of the document.*
-  - *Introduce the inference procedure and report the p-value, as well as your conclusion in context.  Make sure you discuss the strength of the evidence.*
+We created a bar chart representing the three types of crimes in our new 'crime_categorized' variable. Across all of the crime groups, we can easily notice that all of the crimes are not equal in proportion to each other.
+
+To test our hypothesis, we have performed a chi-squared test of independence due to having three levels in our 'crime_categorized' variable. The p-value that is of result is 0. We have strong evidence to reject our null, and that the distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).
   
 \newpage
 
@@ -64,7 +67,7 @@ gf_point(percent_in_school ~ percent_poverty, data = ResearchQuestion1)
 
 violent_crimes <- c("assault-simple", "weapon-unlawful-discharge-of", "menacing-felony-w-weap", "agg-aslt-shoot",
                     "robbery-bank", "robbery-street", "robbery-business", "robbery-car-jacking", "robbery-residence",
-                    "homicide-other", "aggravated-assault", "kidnap-adult-victim", "weapon-other-viol", "agg-aslt-police-weapon",
+                    "h omicide-other", "aggravated-assault", "kidnap-adult-victim", "weapon-other-viol", "agg-aslt-police-weapon",
                     "false-imprisonment", "weapon-fire-into-occ-bldg", "weapon-fire-into-occ-veh",
                     "explosive-incendiary-dev-use", "explosive-incendiary-dev-pos", "threats-to-injure", "assault-police-simple",
                     "homicide-family")
@@ -95,7 +98,7 @@ categorize_crime <- function(crime_type) {
 ResearchQuestion2 <- CrimeDataRaw
 
 # Applying the categorization to the copy
-ResearchQuestion2$crime_category <- sapply(ResearchQuestion1$offense_type_id, categorize_crime)
+ResearchQuestion2$crime_category <- sapply(ResearchQuestion2$offense_type_id, categorize_crime)
 
 # Creating the bar plot
 ggplot(ResearchQuestion2, aes(x = crime_category, fill = crime_category)) +

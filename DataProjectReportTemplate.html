@@ -1651,9 +1651,17 @@ CrimeDataRaw &lt;- read.csv(file.choose())
 # Perform any necessary transformations</code></pre>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p><em>Introduce the dataset in your own words. Discuss, briefly, the
-motivation and curiousity behind your choice of research questions.
-</em></p>
+<p>For this project we have considered a sample of 75,000 individual
+data points that have been collected from the City of Denver’s crime
+database, dating back for the previous 5 calendar years. Each individual
+data point includes data such as neighborhood insights of where the
+crime was committed, such as median income, demographics, etc, and
+details of the crime itself, such as the description of the crime, time
+of the crime, etc. We are curious about whether there is a positive
+association between the percentage of residents that are impoverished
+and whether residents are in school. Additionally, if the number of
+crimes are equally spread across the three crime types (non-violent,
+violent, and property).</p>
 </div>
 <div id="research-question-1" class="section level2">
 <h2>Research Question 1</h2>
@@ -1674,24 +1682,31 @@ well as your conclusion in context. Make sure you discuss the strength
 of the evidence.</em></li>
 </ul>
 </div>
-<div id="research-question-2" class="section level2">
-<h2>Research Question 2</h2>
-<p><em>Write the research question in the section title and clearly
-detail any data manipulations you performed to be able to answer this
-research question. Do not include R code; use complete sentences to
-describe what you did. </em></p>
-<ul>
-<li><em>Write the relevant hypothesis test and clearly define the
-parameter of interest in the context of your research
-question.</em></li>
-<li><em>Discuss what kind of data visualization you created for this
-question, and what you learned from it as it relates to the research
-question. You will put this visualization at the end of the
-document.</em></li>
-<li><em>Introduce the inference procedure and report the p-value, as
-well as your conclusion in context. Make sure you discuss the strength
-of the evidence.</em></li>
-</ul>
+<div id="are-the-number-of-crimes-committed-equally-spread-across-the-three-main-crime-categories-non-violent-violent-and-property" class="section level2">
+<h2>Are the number of crimes committed equally spread across the three
+main crime categories? (non-violent, violent, and property)</h2>
+<p>We began by transforming the variable ‘crime_category’ into three,
+which we have created a new variable called ‘categorized_crime.’ Data
+points that received the ‘violent’ type for ‘crime_category,’ includes
+crimes such as assault, robbery, homicide, etc, with data points
+receiving ‘property_crimes’ are theft, arson, etc. The rest are
+categorized a ‘non-violent.’ After. performing those operations in
+creating a new variable, we are left with being able to answer the
+following hypothesis:</p>
+<p><span class="math display">\[H_0: \text{The distribution of crimes is
+equal across the three crime categories (non-violent, violent, and
+property).}\]</span> <span class="math display">\[H_a: \text{The
+distribution of crimes is not equal across the three crime categories
+(non-violent, violent, and property).}\]</span></p>
+<p>We created a bar chart representing the three types of crimes in our
+new ‘crime_categorized’ variable. Across all of the crime groups, we can
+easily notice that all of the crimes are not equal in proportion to each
+other.</p>
+<p>To test our hypothesis, we have performed a chi-squared test of
+independence due to having three levels in our ‘crime_categorized’
+variable. The p-value that is of result is 0. We have strong evidence to
+reject our null, and that the distribution of crimes is not equal across
+the three crime categories (non-violent, violent, and property).</p>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="figures" class="section level2">
@@ -1703,8 +1718,7 @@ of the evidence.</em></li>
 <h1>Appendix</h1>
 <p><em>Put your R code to perform the hypothesis tests here. It must
 appear in your report with the output</em></p>
-<pre class="r"><code>ResearchQuestion1Model = lm(formula = percent_in_school ~ percent_poverty, data = ResearchQuestion1)
-summary(ResearchQuestion1Model)</code></pre>
+<pre class="r"><code>summary(lm(percent_in_school ~ percent_poverty, data=ResearchQuestion1))</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = percent_in_school ~ percent_poverty, data = ResearchQuestion1)
@@ -1723,25 +1737,24 @@ summary(ResearchQuestion1Model)</code></pre>
 ## Residual standard error: 9.002 on 74998 degrees of freedom
 ## Multiple R-squared:  0.02201,    Adjusted R-squared:  0.022 
 ## F-statistic:  1688 on 1 and 74998 DF,  p-value: &lt; 2.2e-16</code></pre>
-<pre class="r"><code>ResearchQuestion2Crimes &lt;- table(ResearchQuestion2$crime_category)
-Alternatives &lt;- c(30000, 30000, 30000)
-ResearchQuestion2Table &lt;- rbind(ResearchQuestion2Crimes, Alternatives)
-xchisq.test(ResearchQuestion2Table)</code></pre>
+<pre class="r"><code># calculate observed stats
+observed &lt;- table(ResearchQuestion2$crime_category)
+# null proportion, all types of crime are equal
+# could be swapred for national data to see if denver matches the national expected values
+expected_prob &lt;- c(1/3, 1/3, 1/3)
+
+# chi squared inference
+xchisq.test(x = observed, p = expected_prob)</code></pre>
 <pre><code>## 
-##  Pearson&#39;s Chi-squared test
+##  Chi-squared test for given probabilities
 ## 
 ## data:  x
-## X-squared = 37992, df = 2, p-value &lt; 2.2e-16
+## X-squared = 72479, df = 2, p-value &lt; 2.2e-16
 ## 
-##  13090.00   59227.00    2683.00 
-## (19586.36) (40557.73) (14855.91)
-## [2154.70] [8593.72] [9974.46]
-## &lt; -46.42&gt; &lt;  92.70&gt; &lt; -99.87&gt;
-##      
-##  30000.00   30000.00   30000.00 
-## (23503.64) (48669.27) (17827.09)
-## [1795.58] [7161.43] [8312.05]
-## &lt;  42.37&gt; &lt; -84.63&gt; &lt;  91.17&gt;
+##  13118    59227     2655  
+## (25000.00) (25000.00) (25000.00)
+## [ 5647.28] [46859.50] [19971.96]
+## &lt; -75.15&gt; &lt; 216.47&gt; &lt;-141.32&gt;
 ##      
 ## key:
 ##  observed
