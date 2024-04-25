@@ -29,30 +29,32 @@ CrimeDataRaw <- read.csv(file.choose())
 
 ```
 
-
 ## Introduction
 
-For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property). 
-  
-## Research Question 1
+For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property).
 
-*Write the research question in the section title and clearly detail any data manipulations you performed to be able to answer this research question. Do not include R code; use complete sentences to describe what you did. * 
-  
-   - *Write the relevant hypothesis test and clearly define the parameter of interest in the context of your research question.* 
-   - *Discuss what kind of data visualization you created for this question, and what you learned from it as it relates to the research question.  You will put this visualization at the end of the document.*
-  - *Introduce the inference procedure and report the p-value, as well as your conclusion in context.  Make sure you discuss the strength of the evidence.*
-  
+## Is there a positive association between the percent of a neighborhood in poverty and the percent of the population in school?
+
+This question did not require data manipulation. We have 75,000 observations available for this question.
+
+Our hypotheses are:
+
+$$[H_0: \text{There is no association between the percent of a neighborhood in poverty and the percent of the population in school).}]$$ $$[H_a: \text{There is a positive association between the percent of a neighborhood in poverty and the percent of the population in school).}]$$
+
+We created a scatter plot to visualize these two variables. The majority of the cases had a poverty percentage of between 0% and 10% and a percentage of school between 12.5% and 25%. It appears that there is a positive association between the two variables.
+
+To test the hypothesis we performed an inference for correlation. The resulting R\^2 value was 0.02201. The percentage in poverty accounts for 2.201% of the variability in the percent of the population in school. There is no evidence that there is a positive association between the percent of a neighborhood in poverty and the percent of the population in school.
+
 ## Are the number of crimes committed equally spread across the three main crime categories? (non-violent, violent, and property)
 
 We began by transforming the variable 'crime_category' into three, which we have created a new variable called 'categorized_crime.' Data points that received the 'violent' type for 'crime_category,' includes crimes such as assault, robbery, homicide, etc, with data points receiving 'property_crimes' are theft, arson, etc. The rest are categorized a 'non-violent.' After. performing those operations in creating a new variable, we are left with being able to answer the following hypothesis:
 
-\[H_0: \text{The distribution of crimes is equal across the three crime categories (non-violent, violent, and property).}\]
-\[H_a: \text{The distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).}\]
-  
+$$H_0: \text{The distribution of crimes is equal across the three crime categories (non-violent, violent, and property).}$$ $$H_a: \text{The distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).}$$
+
 We created a bar chart representing the three types of crimes in our new 'crime_categorized' variable. Across all of the crime groups, we can easily notice that all of the crimes are not equal in proportion to each other.
 
 To test our hypothesis, we have performed a chi-squared test of independence due to having three levels in our 'crime_categorized' variable. The p-value that is of result is 0. We have strong evidence to reject our null, and that the distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).
-  
+
 \newpage
 
 ## Figures
@@ -115,7 +117,7 @@ ggplot(ResearchQuestion2, aes(x = crime_category, fill = crime_category)) +
 
 # Appendix
 
-*Put your R code to perform the hypothesis tests here.  It must appear in your report with the output*
+*Put your R code to perform the hypothesis tests here. It must appear in your report with the output*
 
 ```{r, include = T, echo = T}
 
@@ -134,7 +136,3 @@ expected_prob <- c(1/3, 1/3, 1/3)
 # chi squared inference
 xchisq.test(x = observed, p = expected_prob)
 ```
-
-
-
-

@@ -59,11 +59,11 @@ RawData <- read.csv(file.choose())
 Write down what your research questions, and translate them into the correct hypothesis tests.  Review the research question guidelines in step one if necessary
 
 ### Research Question 1: (Correlation)
-Is there a positive association between the percent poverty of a neighborhood and the percent of the population being in school?
+Is there a positive association between the percent of a neighborhood in poverty and the percent of the
+population in school?
 
 ### Research Question 2: (Chi-Squared)
 Does the crime type (non violent / violent / property) match the expected US rates?
-
 
 
 Once you have your research questions, it is strongly recommended that you talk with your professor (*in lab*) about whether they can be answered with your data and what kind of data manipulation might be needed.  You should think carefully about what type of data wrangling you think should be done.  Your professor can help confirm your thoughts, or suggest different approaches.  It's possible you have a data wrangling idea that isn't directly covered by the content in lecture.  Your professor may be able to assist.
