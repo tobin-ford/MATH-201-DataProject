@@ -35,7 +35,7 @@ For this project we have considered a sample of 75,000 individual data points th
 
 ## Is there a positive association between the percent of a neighborhood in poverty and the percent of the population in school?
 
-This question did not require data manipulation. We have 75,000 observations available for this question.
+This question did not require data manipulation. We have 75,000 observations available for this question, however each observation is representative of the percent of its neighborhood's population in school and in poverty so many of the entries in the data set are repeated.
 
 Our hypotheses are:
 
@@ -45,7 +45,7 @@ We created a scatter plot to visualize these two variables. The majority of the 
 
 To test the hypothesis we performed an inference for correlation. The resulting R\^2 value was 0.02201. The percentage in poverty accounts for 2.201% of the variability in the percent of the population in school. There is no evidence that there is a positive association between the percent of a neighborhood in poverty and the percent of the population in school.
 
-## Are the number of crimes committed equally spread across the three main crime categories? (non-violent, violent, and property)
+## Are the different types of crime (non-violent, violent, and property) not equally likely to occur.
 
 We began by transforming the variable 'crime_category' into three, which we have created a new variable called 'categorized_crime.' Data points that received the 'violent' type for 'crime_category,' includes crimes such as assault, robbery, homicide, etc, with data points receiving 'property_crimes' are theft, arson, etc. The rest are categorized a 'non-violent.' After. performing those operations in creating a new variable, we are left with being able to answer the following hypothesis:
 
