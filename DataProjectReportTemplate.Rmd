@@ -1,5 +1,5 @@
 ---
-title: "Group Project"
+title: "Group 4 Final Project"
 output:
   html_document:
     df_print: paged
@@ -31,7 +31,7 @@ CrimeDataRaw <- read.csv("sp24DenverCrimeData.csv")
 
 ## Introduction
 
-For this project we have considered a sample of 75,000 individual data points that have been collected from the City of Denver's crime database, dating back for the previous 5 calendar years. Each individual data point includes data such as neighborhood insights of where the crime was committed, such as median income, demographics, etc, and details of the crime itself, such as the description of the crime, time of the crime, etc. We are curious about whether there is a positive association between the percentage of residents that are impoverished and whether residents are in school. Additionally, if the number of crimes are equally spread across the three crime types (non-violent, violent, and property).
+For this project, we have analyzed a sample of 75,000 individual data points sourced from the City of Denver's crime database, covering the preceding 5 calendar years. Each data point encompasses neighborhood attributes where the crime occurred, such as median income, demographics, and more, along with specifics of the crime itself, including its description and time. We aim to investigate whether there exists a positive correlation between the percentage of impoverished residents and their school attendance. Furthermore, we seek to determine if the occurrence of crimes is evenly distributed among the three crime categories: non-violent, violent, and property.
 
 ## Is there a positive association between the percent of a neighborhood in poverty and the percent of the population in school?
 
@@ -39,18 +39,18 @@ This question did not require data manipulation. We have 75,000 observations ava
 
 Our hypotheses are:
 
-$$H_0: \text{There is no association between the percent of a neighborhood in poverty and the percent of the population in school).}$$ 
-$$H_a: \text{There is a positive association between the percent of a neighborhood in poverty and the percent of the population in school).}$$
+$$H_0: \rho =0 \text{ (No association between the percent in poverty and the percent of the population in school).}$$ 
+$$H_a: \rho > 0 \text{ (Positive association between the percent in poverty and the percent of the population in school).}$$
 
 We created a scatter plot to visualize these two variables. The majority of the cases had a poverty percentage of between 0% and 10% and a percentage of school between 12.5% and 25%. It appears that there is a positive association between the two variables.
 
-To test the hypothesis we performed an inference for correlation. The resulting R\^2 value was 0.02201. The percentage in poverty accounts for 2.201% of the variability in the percent of the population in school. There is no evidence that there is a positive association between the percent of a neighborhood in poverty and the percent of the population in school.
+To test the hypothesis we performed a correlation test for correlation. The resulting $R^2$ value was 0.02201, and the resulting p-value was 0. The percentage in poverty accounts for 2.201% of the variability in the percent of the population in school. There is sufficient evidence that there is a positive association between the percent of a neighborhood in poverty and the percent of the population in school.
 
 ## Are the different types of crime (non-violent, violent, and property) not equally likely to occur.
 
 We have 75,000 observations available for this question.
 
-Data manipulation: We began by transforming the variable 'crime_category' into three, which we have created a new variable called 'categorized_crime.' Data points that received the 'violent' type for 'crime_category,' includes crimes such as assault, robbery, homicide, etc, with data points receiving 'property_crimes' are theft, arson, etc. The rest are categorized a 'non-violent.' After. performing those operations in creating a new variable, we are left with being able to answer the following hypothesis:
+Data manipulation: We began by categorizing the variable 'crime_category' into three groups from which we created a new variable called 'categorized_crime.' Data points that received the 'violent' type for 'crime_category' includes crimes such as assault, robbery, homicide, with data points receiving 'property_crimes' are theft, arson, etc. The rest are categorized a 'non-violent.' After performing those operations, we are left with being able to answer the following hypothesis:
 
 $$H_0: \text{The distribution of crimes is equal across the three crime categories (non-violent, violent, and property).}$$ 
 $$H_a: \text{The distribution of crimes is not equal across the three crime categories (non-violent, violent, and property).}$$
@@ -65,7 +65,11 @@ To test our hypothesis, we have performed a chi-squared test of independence due
 
 ```{r, include = T}
 ResearchQuestion1 <- CrimeDataRaw
-gf_point(percent_in_school ~ percent_poverty, data = ResearchQuestion1)
+ggplot(ResearchQuestion1, aes(x = percent_poverty, y = percent_in_school)) +
+  geom_point() +  # Adding points
+  labs(title = "Relationship Between Poverty and School Attendance",
+       x = "Percent Poverty",  # X-axis label
+       y = "Percent in School")  # Y-axis label
 
 ```
 
@@ -121,11 +125,9 @@ ggplot(ResearchQuestion2, aes(x = crime_category, fill = crime_category)) +
 
 # Appendix
 
-*Put your R code to perform the hypothesis tests here. It must appear in your report with the output*
-
 ```{r, include = T, echo = T}
 
-summary(lm(percent_in_school ~ percent_poverty, data=ResearchQuestion1))
+cor.test(percent_in_school ~ percent_poverty, data=ResearchQuestion1)
 
 
 ```
