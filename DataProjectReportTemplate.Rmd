@@ -33,18 +33,18 @@ CrimeDataRaw <- read.csv("sp24DenverCrimeData.csv")
 
 For this project, we have analyzed a sample of 75,000 individual data points sourced from the City of Denver's crime database, covering the preceding 5 calendar years. Each data point encompasses neighborhood attributes where the crime occurred, such as median income, demographics, and more, along with specifics of the crime itself, including its description and time. We aim to investigate whether there exists a positive correlation between the percentage of impoverished residents and their school attendance. Furthermore, we seek to determine if the occurrence of crimes is evenly distributed among the three crime categories: non-violent, violent, and property.
 
-## Is there a positive association between the percent of a neighborhood in poverty and the percent of the population in school?
+## Is there an association between the percent of a neighborhood in poverty and the percent of the population in school?
 
 This question did not require data manipulation. We have 75,000 observations available for this question, however each observation is representative of the percent of its neighborhood's population in school and in poverty so many of the entries in the data set are repeated.
 
 Our hypotheses are:
 
 $$H_0: \rho =0 \text{ (No association between the percent in poverty and the percent of the population in school).}$$ 
-$$H_a: \rho > 0 \text{ (Positive association between the percent in poverty and the percent of the population in school).}$$
+$$H_a: \rho \neq 0 \text{ (There is an association between the percent in poverty and the percent of the population in school).}$$
 
 We created a scatter plot to visualize these two variables. The majority of the cases had a poverty percentage of between 0% and 10% and a percentage of school between 12.5% and 25%. It appears that there is a positive association between the two variables.
 
-To test the hypothesis we performed a correlation test for correlation. The resulting $R^2$ value was 0.02201, and the resulting p-value was 0. The percentage in poverty accounts for 2.201% of the variability in the percent of the population in school. There is sufficient evidence that there is a positive association between the percent of a neighborhood in poverty and the percent of the population in school.
+To test the hypothesis we performed a correlation test. The resulting $\rho$ value was 0.148364, and the resulting p-value was 0. There is strong evidence using a significance level of 0.05 that there is an association between the percent of a neighborhood in poverty and the percent of the population in school. However, because $\rho=0.148364$ the association between the percent in poverty and the percent of the population in school is weak. 
 
 ## Are the different types of crime (non-violent, violent, and property) not equally likely to occur.
 
